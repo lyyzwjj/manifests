@@ -1,0 +1,19 @@
+加密密码的步骤如下：
+1.创建master密码
+mvn --encrypt-master-password Outetsu2022@
+该命令行将产生一个加密的密码，例如
+{XG8/k/0MLVsHb9Lrtnt0tdgcSltY349Wmu2mPNxKPUM=}
+将其保存到${user.home}/.m2/settings-security.xml文件中，例如
+<settingsSecurity>
+<master>{XG8/k/0MLVsHb9Lrtnt0tdgcSltY349Wmu2mPNxKPUM=}</master>
+</settingsSecurity>
+2.加密密码
+mvn --encrypt-password 6S-z-2UhGy
+该命令行将产生一个加密的密码，例如
+{O+Il/JaUECcHLTAxjhTBT03jk8X6OFDGDth8Yi1ABik=}
+将其保存到settings.xml文件中，例如
+<server>
+<id>releases</id>
+<username>07b5beb76f000f0f0fd5c01ace348d40_07b5beb8378026021f63c01ad9da5a59</username>
+<password>{O+Il/JaUECcHLTAxjhTBT03jk8X6OFDGDth8Yi1ABik=}</password>
+</server>
