@@ -1,0 +1,7 @@
+[http]
+	sslBackend = openssl
+[user]
+	name = wangzhe2@pconline.com.cn
+	email = wzzst310
+[http "https://github.com"]
+	proxy = http://127.0.0.1:1087
