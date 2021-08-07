@@ -215,8 +215,8 @@ etcd:
 
 
 dashboard:
-  enabled: false
+  enabled: true
 
 
 ingress-controller:
-  enabled: false
+  enabled: true
