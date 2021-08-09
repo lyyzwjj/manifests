@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "mmp-watsons-member.fullname" . }}
+  name: {{ include "mmp.fullname" . }}
   labels:
-    {{- include "mmp-watsons-member.labels" . | nindent 4 }}
+    {{- include "mmp.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "mmp-watsons-member.selectorLabels" . | nindent 6 }}
+      {{- include "mmp.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "mmp-watsons-member.selectorLabels" . | nindent 8 }}
+        {{- include "mmp.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "mmp-watsons-member.serviceAccountName" . }}
+      serviceAccountName: {{ include "mmp.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
