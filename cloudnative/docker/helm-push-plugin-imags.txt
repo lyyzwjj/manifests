@@ -1,0 +1,6 @@
+docker pull docker.io/alpine/helm:latest
+docker run --name helm3 --entrypoint="/bin/sh"  --rm -it docker.io/alpine/helm:latest
+--进到容器内部安装helm push插件  
+    helm plugin install https://github.com/chartmuseum/helm-push
+--将运行中的容器打包成新的带有push插件的镜像 并将默认entrypoint 改成 /bin/sh
+docker commit -a "watsons helm3 with push plugin images" --change='ENTRYPOINT "/bin/sh"' -p helm3 registry.cn-hangzhou.aliyuncs.com/wzzst310/helm3-push:v1.0.0
