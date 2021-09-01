@@ -19,7 +19,7 @@ services:
           memory: 50M
     networks:
       default:
-        ipv4_address: "172.18.1.5"
+        ipv4_address: "172.18.1.5"
  
   redisslave1:
     image: redis
