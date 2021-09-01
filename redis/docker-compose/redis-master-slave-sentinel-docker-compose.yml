@@ -10,9 +10,6 @@ services:
     volumes:
       - /data/docker/redis/master-slave/master:/data
       - /root/sources/manifests/redis/redis-conf:/usr/local/etc/redis
-    networks:
-      default:
-        ipv4_address: "172.18.1.5"
     environment:
       TZ: "Asia/Shanghai"
     deploy:
@@ -20,6 +17,9 @@ services:
         limits:
           cpus: '0.25'
           memory: 50M
+    networks:
+      default:
+        ipv4_address: "172.18.1.5"
  
   redisslave1:
     image: redis
@@ -33,9 +33,6 @@ services:
     volumes:
       - /data/docker/redis/sentinel/slave1:/data
       - /root/sources/manifests/redis/redis-conf:/usr/local/etc/redis
-    networks:
-      default:
-        ipv4_address: "172.18.1.6"
     environment:
       TZ: "Asia/Shanghai"
     deploy:
@@ -43,6 +40,9 @@ services:
         limits:
           cpus: '0.25'
           memory: 50M
+    networks:
+      default:
+        ipv4_address: "172.18.1.6"
 
   redisslave2:
     image: redis
@@ -56,9 +56,6 @@ services:
     volumes:
       - /data/docker/redis/sentinel/slave2:/data
       - /root/sources/manifests/redis/redis-conf:/usr/local/etc/redis
-    networks:
-      default:
-        ipv4_address: "172.18.1.7"
     environment:
       TZ: "Asia/Shanghai"
     deploy:
@@ -66,6 +63,9 @@ services:
         limits:
           cpus: '0.25'
           memory: 50M
+    networks:
+      default:
+        ipv4_address: "172.18.1.7"
 
 networks:
   default:
