@@ -1,0 +1,56 @@
+version: '3.9'
+services:
+  redismaster:
+    image: redis
+    container_name: redismaster
+    restart: always
+    command: redis-server --port 6379 --requirepass wzzst310  --appendonly yes --bind "0.0.0.0"
+    ports:
+      - 16380:6379
+    volumes:
+      - /data/docker/redis/master-slave/master:/data
+		networks:
+		  redis:
+		    ipv4_address: 172.18.12.3
+		environment:
+      TZ: "Asia/Shanghai"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 50M
+        reservations:
+          cpus: '0.1'
+          memory: 10M	
+ 
+  redisslave:
+    image: redis
+    container_name: redisslave
+		depends_on:
+      - redismaster
+    restart: always
+    command: redis-server --slaveof 172.18.12.3 6379 --port 6379  --requirepass wzzst310 --masterauth wzzst310  --appendonly yes --bind "0.0.0.0"
+    ports:
+      - 16381:6379
+    volumes:
+      - /data/docker/redis/master-slave/slave:/data
+		networks:
+		  redis:
+		    ipv4_address: 172.18.12.4
+    environment:
+      TZ: "Asia/Shanghai"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 50M
+        reservations:
+          cpus: '0.1'
+          memory: 10M
+
+networks:
+   redis:
+      ipam:
+         config:
+         - subnet: 172.18.12.0/24
+           gateway: 172.18.12.1
