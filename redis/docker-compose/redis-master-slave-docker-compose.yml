@@ -12,8 +12,8 @@ services:
     networks:
       redis:
         pv4_address: 172.18.12.3
-		environment:
-      TZ: "Asia/Shanghai"
+    environment:
+      - TZ="Asia/Shanghai"
     deploy:
       resources:
         limits:
@@ -38,7 +38,7 @@ services:
       redis:
         ipv4_address: 172.18.12.4
     environment:
-      TZ: "Asia/Shanghai"
+      - TZ="Asia/Shanghai"
     deploy:
       resources:
         limits:
