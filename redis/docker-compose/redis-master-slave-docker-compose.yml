@@ -11,7 +11,7 @@ services:
       - /data/docker/redis/master-slave/master:/data
     networks:
       redis:
-        pv4_address: 172.18.12.3
+        ipv4_address: 172.18.12.3
     environment:
       - TZ="Asia/Shanghai"
     deploy:
