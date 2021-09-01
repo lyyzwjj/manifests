@@ -11,8 +11,8 @@ services:
       - /data/docker/redis/master-slave/master:/data
       - /root/sources/manifests/redis/redis-conf:/usr/local/etc/redis
     networks:
-      redis-sentinel:
-        ipv4_address: 172.18.1.5
+      default:
+        ipv4_address: "172.18.1.5"
     environment:
       TZ: "Asia/Shanghai"
     deploy:
@@ -34,8 +34,8 @@ services:
       - /data/docker/redis/sentinel/slave1:/data
       - /root/sources/manifests/redis/redis-conf:/usr/local/etc/redis
     networks:
-      redis-sentinel:
-        ipv4_address: 172.18.1.6
+      default:
+        ipv4_address: "172.18.1.6"
     environment:
       TZ: "Asia/Shanghai"
     deploy:
@@ -57,8 +57,8 @@ services:
       - /data/docker/redis/sentinel/slave2:/data
       - /root/sources/manifests/redis/redis-conf:/usr/local/etc/redis
     networks:
-      redis-sentinel:
-        ipv4_address: 172.18.1.7
+      default:
+        ipv4_address: "172.18.1.7"
     environment:
       TZ: "Asia/Shanghai"
     deploy:
