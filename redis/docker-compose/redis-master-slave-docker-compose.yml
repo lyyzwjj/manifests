@@ -18,10 +18,7 @@ services:
       resources:
         limits:
           cpus: '0.25'
-          memory: 50M
-        reservations:
-          cpus: '0.1'
-          memory: 10M  
+          memory: 50M 
  
   redisslave:
     image: redis
@@ -44,9 +41,6 @@ services:
         limits:
           cpus: '0.25'
           memory: 50M
-        reservations:
-          cpus: '0.1'
-          memory: 10M
 
 networks:
    redis:
