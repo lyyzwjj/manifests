@@ -4,9 +4,12 @@ services:
     image: redis
     container_name: redismaster1
     restart: always
-    command:: >
-      redis-server /usr/local/etc/redis/redis-master1.conf
-      redis-server /usr/local/etc/redis/sentinel-master1.conf --sentinel
+    command:
+      - /bin/bash 
+      - -c 
+      - |
+        redis-server /usr/local/etc/redis/redis-master1.conf
+        redis-server /usr/local/etc/redis/sentinel-master1.conf --sentinel
     ports:
       - 16382:6379
     volumes:
@@ -29,9 +32,12 @@ services:
     depends_on:
       - redismaster1
     restart: always
-    command: >
-      redis-server /usr/local/etc/redis/redis-slave1.conf
-      && redis-server /usr/local/etc/redis/sentinel-slave1.conf --sentinel
+    command:
+      - /bin/bash 
+      - -c 
+      - |
+        redis-server /usr/local/etc/redis/redis-slave1.conf
+        redis-server /usr/local/etc/redis/sentinel-slave1.conf --sentinel
     ports:
       - 16383:6379
     volumes:
@@ -54,9 +60,12 @@ services:
     depends_on:
       - redismaster1
     restart: always
-    command: >
-      redis-server /usr/local/etc/redis/redis-slave2.conf
-      &&  redis-server /usr/local/etc/redis/sentinel-slave2.conf --sentinel
+    command:
+      - /bin/bash 
+      - -c 
+      - |
+        redis-server /usr/local/etc/redis/redis-slave2.conf
+        redis-server /usr/local/etc/redis/sentinel-slave2.conf --sentinel
     ports:
       - 16384:6379
     volumes:
