@@ -1,6 +1,5 @@
 version: '3.9'
 services:
-    :
     image: redis
     container_name: redismaster1
     restart: always
