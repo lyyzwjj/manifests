@@ -8,7 +8,7 @@ services:
     ports:
       - 16382:6379
     volumes:
-      - /data/docker/redis/master-slave/master:/data
+      - /data/docker/redis/sentinel/master1:/data
       - /root/sources/manifests/redis/redis-conf:/usr/local/etc/redis
     environment:
       TZ: "Asia/Shanghai"
