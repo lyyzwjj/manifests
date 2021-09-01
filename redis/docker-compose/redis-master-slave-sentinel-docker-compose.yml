@@ -69,7 +69,5 @@ services:
 
 networks:
   default:
-    external:
-      name: redis-sentinel
-  redis-sentinel:
     external: true
+    name: redis-sentinel
