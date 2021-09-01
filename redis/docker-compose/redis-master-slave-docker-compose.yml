@@ -9,9 +9,9 @@ services:
       - 16380:6379
     volumes:
       - /data/docker/redis/master-slave/master:/data
-		networks:
-		  redis:
-		    ipv4_address: 172.18.12.3
+    networks:
+      redis:
+        pv4_address: 172.18.12.3
 		environment:
       TZ: "Asia/Shanghai"
     deploy:
@@ -34,9 +34,9 @@ services:
       - 16381:6379
     volumes:
       - /data/docker/redis/master-slave/slave:/data
-		networks:
-		  redis:
-		    ipv4_address: 172.18.12.4
+    networks:
+      redis:
+        ipv4_address: 172.18.12.4
     environment:
       TZ: "Asia/Shanghai"
     deploy:
