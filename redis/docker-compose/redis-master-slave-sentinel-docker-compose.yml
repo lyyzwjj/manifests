@@ -9,6 +9,7 @@ services:
       - -c 
       - |
         redis-server /usr/local/etc/redis/redis-master1.conf
+        sleep 5
         redis-sentinel /usr/local/etc/redis/sentinel-master1.conf
     ports:
       - 16382:6379
@@ -38,6 +39,7 @@ services:
       - -c 
       - |
         redis-server /usr/local/etc/redis/redis-slave1.conf
+        sleep 10
         redis-sentinel /usr/local/etc/redis/sentinel-slave1.conf
     ports:
       - 16383:6379
@@ -67,6 +69,7 @@ services:
       - -c 
       - |
         redis-server /usr/local/etc/redis/redis-slave2.conf
+        sleep 10
         redis-sentinel /usr/local/etc/redis/sentinel-slave2.conf
     ports:
       - 16384:6379
