@@ -21,12 +21,12 @@ services:
           memory: 50M
         reservations:
           cpus: '0.1'
-          memory: 10M	
+          memory: 10M  
  
   redisslave:
     image: redis
     container_name: redisslave
-		depends_on:
+    depends_on:
       - redismaster
     restart: always
     command: redis-server --slaveof 172.18.12.3 6379 --port 6379  --requirepass wzzst310 --masterauth wzzst310  --appendonly yes --bind "0.0.0.0"
