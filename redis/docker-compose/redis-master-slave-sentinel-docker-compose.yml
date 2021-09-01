@@ -12,6 +12,7 @@ services:
         redis-server /usr/local/etc/redis/sentinel-master1.conf --sentinel
     ports:
       - 16382:6379
+      - 36379:26379
     volumes:
       - /data/docker/redis/sentinel/master1:/data
       - /root/sources/manifests/redis/redis-conf:/usr/local/etc/redis
@@ -40,6 +41,7 @@ services:
         redis-server /usr/local/etc/redis/sentinel-slave1.conf --sentinel
     ports:
       - 16383:6379
+      - 36380:26379
     volumes:
       - /data/docker/redis/sentinel/slave1:/data
       - /root/sources/manifests/redis/redis-conf:/usr/local/etc/redis
@@ -68,6 +70,7 @@ services:
         redis-server /usr/local/etc/redis/sentinel-slave2.conf --sentinel
     ports:
       - 16384:6379
+      - 36381:26379
     volumes:
       - /data/docker/redis/sentinel/slave2:/data
       - /root/sources/manifests/redis/redis-conf:/usr/local/etc/redis
