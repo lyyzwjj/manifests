@@ -1,0 +1,75 @@
+version: '3.9'
+services:
+  redismaster:
+    image: redis
+    container_name: redismaster1
+    restart: always
+    command: redis-server /usr/local/etc/redis/redis-master1.conf
+    ports:
+      - 16382:6379
+    volumes:
+      - /data/docker/redis/master-slave/master:/data
+      - /root/sources/manifests/redis/redis-conf:/usr/local/etc/redis
+		networks:
+		redis-sentinel:
+		    ipv4_address:  172.18.1.5
+		environment:
+      TZ: "Asia/Shanghai"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 50M
+ 
+  redisslave:
+    image: redis
+    container_name: redisslave1
+		depends_on:
+      - redismaster1
+    restart: always
+    command: redis-server /usr/local/etc/redis/redis-slave1.conf
+    ports:
+      - 16383:6379
+    volumes:
+      - /data/docker/redis/sentinel/slave1:/data
+      - /root/sources/manifests/redis/redis-conf:/usr/local/etc/redis
+		networks:
+		  redis-sentinel:
+		    ipv4_address:  172.18.1.6
+    environment:
+      TZ: "Asia/Shanghai"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 50M
+
+  redisslave:
+    image: redis
+    container_name: redisslave2
+		depends_on:
+      - redismaster1
+    restart: always
+    command: redis-server /usr/local/etc/redis/redis-slave2.conf
+    ports:
+      - 16384:6379
+    volumes:
+      - /data/docker/redis/sentinel/slave2:/data
+      - /root/sources/manifests/redis/redis-conf:/usr/local/etc/redis
+		networks:
+		  redis-sentinel:
+		    ipv4_address:  172.18.1.7
+    environment:
+      TZ: "Asia/Shanghai"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 50M
+
+networks:
+  default:
+    external:
+      name: redis-sentinel
+  redis-sentinel:
+    external: true
