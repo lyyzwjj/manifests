@@ -1,0 +1,14 @@
+apiVersion: apisix.apache.org/v2beta1
+kind: ApisixRoute
+metadata:
+  name: rabbitmq-tcp-route
+  namespace: common
+spec:
+  stream:
+    - name: rabbitmq-tcp-route-rule
+      protocol: TCP
+      match:
+        ingressPort: 5672
+      backend:
+        serviceName: rabbitmq
+        servicePort: 5672
