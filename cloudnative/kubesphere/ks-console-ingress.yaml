@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ks-console-svc-for-ingress
+  namespace: kubesphere-system
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: ingress
+    port: 80
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: ks-console
+    tier: frontend
+    version: v3.1.0
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
+
+--
+
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: ks-console-ingress
+  namespace: kubesphere-system
+  annotations:
+    kubernetes.io/ingress.class: apisix
+spec:
+  rules:
+    - host: kubesphere.wjjzst.com
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              serviceName: ks-console-svc-for-ingress
+              servicePort: 80
