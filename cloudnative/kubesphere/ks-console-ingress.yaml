@@ -19,7 +19,7 @@ spec:
 
 ---
 kind: Ingress
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 metadata:
   name: ks-console-ingress
   namespace: kubesphere-system
@@ -31,7 +31,7 @@ spec:
       http:
         paths:
           - path: /
-            pathType: ImplementationSpecific
+            pathType: Prefix
             backend:
               serviceName: ks-console-svc-for-ingress
               servicePort: 80
