@@ -1,0 +1,19 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: apisix-dashboard-ingress
+  namespace: common
+  annotations:
+    kubernetes.io/ingress.class: apisix
+spec:
+  rules:
+    - host: apisix.wjjzst.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: apisix-dashboard
+                port:
+                  number: 80
