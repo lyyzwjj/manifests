@@ -1,4 +1,4 @@
-# helm install apisix apisix/apisix  -f /root/sources/manifests/cloudnative/apisix/apisix/values.yaml --version 0.3.5 -n common
+# helm install apisix apisix/apisix  -f /root/sources/manifests/cloudnative/apisix/apisix/values.yaml --version 0.3.5 --set nodeSelector.master=yes -n common
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
