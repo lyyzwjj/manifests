@@ -16,10 +16,8 @@ spec:
     version: v3.1.0
   sessionAffinity: None
   type: NodePort
-status:
-  loadBalancer: {}
 
--
+--
 
 kind: Ingress
 apiVersion: extensions/v1beta1
