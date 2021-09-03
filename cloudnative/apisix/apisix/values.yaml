@@ -1,3 +1,4 @@
+# helm install apisix apisix/apisix  -f /root/sources/manifests/cloudnative/apisix/apisix/values.yaml --version 0.3.5 -n common
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -54,7 +55,8 @@ apisix:
     #   cpu: 100m
     #   memory: 128Mi
 
-  nodeSelector: {}
+  nodeSelector:
+    master: 'yes'
   tolerations: []
   affinity: {}
   # If true, it will sets the anti-affinity of the Pod.
@@ -78,10 +80,12 @@ gateway:
     enabled: true
     servicePort: 80
     containerPort: 9080
+    nodePort: 30080
   tls:
     enabled: false
     servicePort: 443
     containerPort: 9443
+    nodePort: 30443
     http2:
       enabled: true
   stream:  # L4 proxy (TCP/UDP)
