@@ -33,5 +33,7 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-              serviceName: ks-console-svc-for-ingress
-              servicePort: 80
+              service:
+                name: ks-console-svc-for-ingress
+                port:
+                  number: 80
