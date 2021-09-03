@@ -17,8 +17,7 @@ spec:
   sessionAffinity: None
   type: NodePort
 
---
-
+---
 kind: Ingress
 apiVersion: extensions/v1beta1
 metadata:
