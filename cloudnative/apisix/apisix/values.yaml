@@ -99,7 +99,10 @@ gateway:
       enabled: true
   stream:  # L4 proxy (TCP/UDP)
     enabled: false
-    tcp: []
+    tcp: 
+      - 31306
+      - 31672
+      - 31379
     udp: []
   ingress:
     enabled: false
