@@ -50,7 +50,10 @@ ingress:
     # ssl 443的根据域名转发 路由开关 stream
     # enable-ssl-passthrough: ""
     default-ssl-certificate: "ingress-nginx/ingress-default-cert"
-    tcp-services-configmap: {redis: 'common/redis-svc:6379', rabbitmq: 'common/rabbitmq-svc:5672'}
+    # 不能这样配
+    # tcp-services-configmap: 
+    #   redis: common/redis-svc:6379
+    #   rabbitmq: common/rabbitmq-svc:5672
   update_strategy:
     strategy: RollingUpdate
     rollingUpdate:
@@ -89,3 +92,14 @@ metadata:
   name: ingress-default-cert
   namespace: ingress-nginx
 type: kubernetes.io/tls
+
+ --- 
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tcp-services
+  namespace: ingress-nginx
+data:
+  6379: "common/redis-svc:6379"
+  5672: "common/redis-svc:5672"
+  
