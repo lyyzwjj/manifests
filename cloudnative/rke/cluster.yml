@@ -81,6 +81,15 @@ ingress:
 #     password: zzzst2017
 
 addons: |-
+  --- 
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tcp-services
+  namespace: ingress-nginx
+data:
+  6379: "common/redis-svc:6379"
+  5672: "common/redis-svc:5672"
 #   ---
 # apiVersion: v1
 # data:
@@ -92,13 +101,5 @@ addons: |-
 #   name: ingress-default-cert
 #   namespace: ingress-nginx
 # type: kubernetes.io/tls
-  --- 
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: tcp-services
-  namespace: ingress-nginx
-data:
-  6379: "common/redis-svc:6379"
-  5672: "common/redis-svc:5672"
+
   
