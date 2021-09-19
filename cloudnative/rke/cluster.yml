@@ -14,7 +14,7 @@ nodes:
       - key: slave
         effect: NoSchedule
 cluster_name: hw-k8s
-kubernetes_version: v1.21.5-rancher1-1
+kubernetes_version: v1.20.11-rancher1-2
 authentication:
   strategy: x509
   sans:
