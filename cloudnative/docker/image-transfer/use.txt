@@ -1,0 +1,6 @@
+chmod +x rancher-save-images.sh
+chmod +x rancher-load-images.sh
+sort -u rancher-images.txt -o rancher-images.txt
+docker login -u cn-south-1@2KSDD49A8S3NSAE8Y45J -p 821d8888e6cfe007cea4e860cf3e6d27b31201d0e792f0f06a203435f2924471 swr.cn-south-1.myhuaweicloud.com
+./rancher-save-images.sh --image-list ./rancher-images.txt --from-aliyun true
+./rancher-load-images.sh --image-list ./rancher-images.txt --registry swr.cn-south-1.myhuaweicloud.com
