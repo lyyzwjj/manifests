@@ -1,0 +1,12 @@
+查看支持版本
+rke config --list-version --all
+查看所有镜像
+rke config --system-images --all
+
+自制证书
+kubectl -n ingress-nginx create secret tls ingress-default-cert \
+--cert=$HOME/sources/manifests/cloudnative/rke/1_k8s.wjjzst.com_bundle.crt \
+--key=$HOME/sources/manifests/cloudnative/rke/2_k8s.wjjzst.com.key -o yaml \
+--dry-run=client > ingress-default-cert.yaml
+
+./rke_1.3.1 up --config ./cluster.yml
