@@ -98,7 +98,7 @@ gateway:
     http2:
       enabled: true
   stream:  # L4 proxy (TCP/UDP)
-    enabled: false
+    enabled: true
     tcp: 
       - 31306
       - 31672
