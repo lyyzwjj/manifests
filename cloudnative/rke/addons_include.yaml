@@ -15,6 +15,6 @@ metadata:
   name: tcp-services
   namespace: ingress-nginx
 data:
-  redis: "common/redis-svc:6379"
-  rabbitmq: "common/rabbitmq-svc:5672"
-  mysql: "common/mysql-svc:3306"
+  6379: "common/redis-svc:6379"
+  5672: "common/rabbitmq-svc:5672"
+  3306: "common/mysql-svc:3306"
