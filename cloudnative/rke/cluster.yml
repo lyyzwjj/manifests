@@ -50,9 +50,7 @@ ingress:
     # ssl 443的根据域名转发 路由开关 stream
     # enable-ssl-passthrough: ""
     default-ssl-certificate: "ingress-nginx/ingress-default-cert"
-    tcp-services-configmap:
-      redis: common/redis-svc:6379
-      rabbitmq: common/rabbitmq-svc:5672
+    tcp-services-configmap: {redis: 'common/redis-svc:6379', rabbitmq: 'common/rabbitmq-svc:5672'}
   update_strategy:
     strategy: RollingUpdate
     rollingUpdate:
