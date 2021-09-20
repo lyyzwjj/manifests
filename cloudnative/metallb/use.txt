@@ -1,0 +1,13 @@
+helm repo add metallb https://metallb.github.io/metallb
+helm repo update
+helm pull metallb/metallb
+tar zxvf metallb-0.10.2.tgz
+cp metallb/values.yaml ./values.yaml
+vi values.yaml
+configInline:
+  address-pools:
+   - name: default
+     protocol: layer2
+     addresses:
+     - 10.200.10.224/27
+helm install metallb metallb/metallb -f values.yaml -n common
