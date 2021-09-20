@@ -7,7 +7,7 @@ metadata:
     app: demo1
 spec:
   type: LoadBalancer
-  loadBalancerIP: 10.200.10.159
+  loadBalancerIP: 10.200.10.193
   ports:
     - port: 80
       targetPort: http

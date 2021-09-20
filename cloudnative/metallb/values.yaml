@@ -23,10 +23,14 @@ existingConfigMap: ""
 # available options.
 configInline:
   address-pools:
-   - name: default
+   - name: common
      protocol: layer2
      addresses:
      - 10.200.10.224/27
+   - name: apps
+     protocol: layer2
+     addresses:
+     - 10.200.10.192/27
 rbac:
   # create specifies whether to install and use RBAC rules.
   create: true
