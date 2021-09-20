@@ -33,8 +33,8 @@ authentication:
 #     timeout: 60
 ingress:
   # 禁用ingress
-  # provider: none
-  provider: nginx
+  provider: none
+  # provider: nginx
   node_selector:
     app: 'ingress'
   # 如果纯走slb 可以不配节点暴露的端口
@@ -51,9 +51,10 @@ ingress:
     # ssl 443的根据域名转发 路由开关 stream
     enable-ssl-passthrough: ""
     default-ssl-certificate: "ingress-nginx/ingress-default-cert"
+    tcp-services-configmap: $(POD_NAMESPACE)/tcp-services
     # 不能这样配
     # tcp-services-configmap: 
-    #   redis: common/redis-svc:6379
+    #   redis: common/red:is-svc:6379
     #   rabbitmq: common/rabbitmq-svc:5672
   update_strategy:
     strategy: RollingUpdate
@@ -81,5 +82,5 @@ ingress:
 #     user: wzzst310@163.com
 #     password: zzzst2017
 
-addons_include:
-  - ./addons_include.yaml
+# addons_include:
+#   - ./addons_include.yaml
