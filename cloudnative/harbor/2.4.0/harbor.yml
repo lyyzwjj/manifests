@@ -7,15 +7,15 @@ hostname: harbor.wjjzst.com
 # http related config
 http:
   # port for http, default is 80. If https enabled, this port will redirect to https port
-  port: 80
+  port: 1080
 
 # https related config
-# https:
+https:
   # https port for harbor, default is 443
-#   port: 443
+  port: 1443
   # The path of cert and key files for nginx
-#   certificate: /your/certificate/path
-#   private_key: /your/private/key/path
+  certificate: /data/cert/harbor.wjjzst.com.crt
+  private_key: /data/cert/harbor.wjjzst.com.key
 
 # # Uncomment following will enable tls communication between all harbor components
 # internal_tls:
@@ -26,7 +26,7 @@ http:
 
 # Uncomment external_url if you want to enable external proxy
 # And when it enabled the hostname will no longer used
-# external_url: https://reg.mydomain.com:8433
+external_url: https://harbor.wjjzst.com:1080
 
 # The initial password of Harbor admin
 # It only works in first time to install harbor
@@ -44,7 +44,7 @@ database:
   max_open_conns: 900
 
 # The default data volume
-data_volume: /data
+data_volume: /data/harbor/
 
 # Harbor Storage settings by default is using /data dir on local filesystem
 # Uncomment storage_service setting If you want to using external storage
