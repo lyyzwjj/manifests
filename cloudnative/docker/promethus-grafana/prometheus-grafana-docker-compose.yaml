@@ -1,0 +1,33 @@
+version: "3"
+services:
+  prom:
+    image: quay.io/prometheus/prometheus:latest
+    volumes:
+      - /Users/wjj/DataCenter/data/promethues/etc/prometheus:/etc/prometheus
+    command: "--config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus"
+    ports:
+      - 9090:9090
+    environment:
+      TZ: "Asia/Shanghai"
+    depends_on:
+      - exporter
+    restart: "always"
+  exporter:
+    image: prom/node-exporter:latest
+    ports:
+     - 9100:9100
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: wzzst310
+#       GF_INSTALL_PLUGINS: alexanderzobnin-zabbix-app
+      TZ: "Asia/Shanghai"
+    restart: "always"
+#     volumes:
+#       - /Users/wjj/DataCenter/data/grafana/etc/grafana:/etc/grafana
+#       - /Users/wjj/DataCenter/data/grafana/data:/var/lib/grafana/data:rw
+#      - /Users/wjj/DataCenter/data/grafana/plugins:/var/lib/grafana/plugins:rw
+    depends_on:
+      - prom
