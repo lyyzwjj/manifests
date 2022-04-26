@@ -2,15 +2,22 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+faketime:
+  enabled: FAKETIME_USE
+  useConfigMap: true
+  times: +0d
+  ldPreload: LD_PRELOAD
+
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: IMAGE_REPOSITORY
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "IMAGE_TAG"
 
-imagePullSecrets: []
+imagePullSecrets:
+- name: IMAGE_PULL_SECRETS
 nameOverride: ""
 fullnameOverride: ""
 
@@ -38,7 +45,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  ports: SERVICE_PORTS
 
 ingress:
   enabled: false
@@ -56,17 +63,12 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+resources:
+  requests:
+    memory: 2048Mi
+  limits:
+    memory: 3072Mi
+
 
 autoscaling:
   enabled: false
@@ -79,4 +81,15 @@ nodeSelector: {}
 
 tolerations: []
 
-affinity: {}
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          topologyKey: kubernetes.io/hostname
+          labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - CHART_NAME

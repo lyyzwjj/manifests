@@ -34,19 +34,26 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
-              containerPort: 80
+            {{- range .Values.service.ports }}
+            - containerPort: {{ . }}
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
+            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          {{ if .Values.faketime.enabled }}
+          env:
+            - name: LD_PRELOAD
+              value: {{ .Values.faketime.ldPreload | quote }}
+            - name: FAKETIME
+              {{ if .Values.faketime.useConfigMap }}
+              valueFrom:
+                configMapKeyRef:
+                  name: faketimerc
+                  key: FAKETIME
+              {{ else }}
+              value: {{ .Values.faketime.times }}
+              {{ end }}
+          {{ end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -59,3 +66,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+
